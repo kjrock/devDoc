@@ -54,7 +54,7 @@ int main()
 
 ## 가상함수 호출 원린
 
-![vtable](img/4-09_vtable.png)
+![vtable](../img/4-09_vtable.png)
 
 - 각 객체는 가상함수 테이블 + 할당된 변수 메모리로 구성됨
 - 가상 함수 호출시 가상함수 테이블에서 찾음
