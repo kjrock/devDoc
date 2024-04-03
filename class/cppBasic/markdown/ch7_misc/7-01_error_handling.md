@@ -34,3 +34,24 @@ g { color: Green }
    2) 호출자가 무시하고 새로운 DB 작업을 한다면
    3) 더욱 큰 오류가 발생하게 된다.
    4) 심각한 오류는 호출자가 반드시 처리해야 한다.
+
+```c++
+#define ERROR -1
+
+int db_backup() {
+	// 서버에 접속해서 DB 를 백업하는 
+	// 기능 수행하다가 오류가 발생했다면 ?	
+
+	if ( 실패 )
+		return ERROR;
+
+	return 0;
+}
+
+void db_clear() {}
+
+int main() {
+	db_backup();
+	db_clear();
+}
+```
