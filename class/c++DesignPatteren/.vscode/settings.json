@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "*.rmd": "markdown",
+        "future": "cpp",
+        "memory": "cpp",
+        "xmemory": "cpp",
+        "vector": "cpp",
+        "tuple": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp",
+        "deque": "cpp",
+        "list": "cpp"
+    }
+}
