@@ -3,6 +3,12 @@
 // 아래 Point 에는 디폴트 생성자가 없습니다. 디폴트 생성자를 만들지 말고,
 // 아래 상태에 과제를 진행해 주세요.
 
+#include <cstring>
+#include <iostream>
+#include <initializer_list>
+
+using namespace std;
+
 class Point
 {
 public:
@@ -16,6 +22,66 @@ template<typename T> class Vector
     int sz;     // size
     int capa;   // capacity ( 메모리 사용량 )
 public:
+	Vector(int n, const T& other) : sz(n), capa(n)
+    {  
+        T* buff = static_cast<T*>(operator new(sizeof(T) * sz));
+        for (int i=0; i<sz; ++i)
+        {
+            memcpy(&buff[i], &other, sizeof(T));
+        }
+    }
+    // Vector(std::initializer_list<T> s)
+    // {
+    //     sz = s.size();
+    //     capa = sz;
+    //     T* buff = static_cast<T*>(operator new(sizeof(T) * sz));
+    //     int index = 0;
+    //     for(auto i : s)
+    //     {
+    //         buff[index] = i;
+    //         ++index;
+    //     }
+    // }
+    void resize(int n, const T& other=T(0,0))
+    {  
+        if (n <= sz)
+        {
+           for (int i=0; i<sz-n;++i)
+            {
+                buff[sz-i-1].~T();
+            }
+
+            sz = n;
+        } 
+        else
+        {
+
+            T* new_buff = static_cast<T*>(operator new(sizeof(T)*n));
+
+            for (int i=0; i<sz; ++i)
+            {
+                memmove(&new_buff[i], &other, sizeof(T));
+            }
+
+            for (int i=0; i<n-sz; ++i)
+            {
+                memcpy(&new_buff[sz+i], &other, sizeof(T));
+            }
+
+            for (int i=0; i<sz;++i)
+            {
+                buff[i].~T();
+            }
+
+            delete[] buff;
+
+            buff = new_buff;
+            sz = n;
+            capa = n;
+        }
+    }
+    int size() { return sz;}
+    int capacity() { return capa; }
 };
 
 int main()
@@ -35,9 +101,9 @@ int main()
     cout << v.capacity() << endl;   // 20
 
     // 4. initializer_list 추가하기.
-    Vector<int> v2{ 1,2,3,4,5,6,7,8,9,10 };
+    // Vector<int> v2{ 1,2,3,4,5,6,7,8,9,10 };
 
     // 5. ranged for 지원하기
-    for (auto n : v2)
-        cout << n << endl; // 1,2,3,4,5,6,7,8,9,10
+    // for (auto n : v2)
+    //     cout << n << endl; // 1,2,3,4,5,6,7,8,9,10
 }
