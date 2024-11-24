@@ -4,8 +4,10 @@
 
 
 #include <memory>
+#include <cstdlib>
 
 int main()
 {
-    std::unique_ptr<int> up1(static_cast<int*>(malloc(sizeof(int)*20)));
+    auto del = [](int* p) { std::free(p); };
+    std::unique_ptr<int, decltype(del)> up1(static_cast<int*>(std::malloc(sizeof(int)*20)), del);
 }
