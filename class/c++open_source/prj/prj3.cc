@@ -5,6 +5,18 @@
 #include <iostream>
 #include <ranges>
 
+template<typename T> class drop_view : public std::ranges::view_interface<drop_view<T>>
+{
+	T rng;
+	std::size_t drop;
+public:
+	drop_view() = default;
+
+	drop_view(T r, std::size_t c) : rng(r), drop(c) {}
+	auto begin() { return rng.begin() + drop; }
+	auto end()   { return rng.end(); }
+};
+
 int main()
 {
     std::vector v = { 1,2,3,4,5,6,7,8,9,10};

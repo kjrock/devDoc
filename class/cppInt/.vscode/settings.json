@@ -1,5 +1,16 @@
 {
     "files.associations": {
-        "source_location": "cpp"
-    }
+        "*.list": "json",
+        "*.llist": "json",
+        "*.h": "cpp",
+        "source_location": "cpp",
+        "new": "cpp",
+        "sstream": "cpp",
+        "array": "cpp",
+        "string": "cpp",
+        "string_view": "cpp",
+        "ostream": "cpp",
+        "initializer_list": "cpp"
+    },
+    "git.enabled": false
 }

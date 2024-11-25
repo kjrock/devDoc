@@ -2,7 +2,6 @@
 // main 함수가 실행될수 있도록, [] 연산자를 제공해 주세요.
 
 #include <iostream>
-#include <cstring>
 #include <string.h>
 
 class Label
@@ -13,9 +12,10 @@ class Label
 public:
     Label(const char* s) : ref(new int(1))
     {
-        size = std::strlen(s);
+        size = strlen(s);
         text = new char[size + 1];
-        strcpy_s(text, size + 1, s);
+        // strcpy_s(text, size + 1, s);
+        strncpy(text, s, size + 1);
 
         ref = new int(1);
     }
@@ -24,6 +24,9 @@ public:
         ++(*ref);
     }
     char& operator [](int idx) {
+        char* text_old = text;
+        text = new char[size + 1];
+        strncpy(text, text_old, size + 1);
         ref = new int(1);
         return text[idx];
     }
